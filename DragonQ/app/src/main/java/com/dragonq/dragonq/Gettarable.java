@@ -1,5 +1,6 @@
 package com.dragonq.dragonq;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -7,5 +8,5 @@ import java.util.List;
  */
 
 public interface Gettarable {
-    List<Question> getQuestion();
+    List<Question> getQuestion() throws IOException;
 }
