@@ -15,8 +15,8 @@ import java.util.Map;
  */
 public class Package implements Gettarable {
     @Override
-    public List<Question> getQuestion() throws IOException {
-        List <Question> list = new ArrayList<Question>();
+    public ArrayList<Question> getQuestion() throws IOException {
+        ArrayList<Question> list = new ArrayList<Question>();
 
         String url =  "http://echo.jsontest.com/Id/1/Content/Content/Comment/Comment/Answer/Answer/Tags/Tags";
         /*String paramValue = "4052102";

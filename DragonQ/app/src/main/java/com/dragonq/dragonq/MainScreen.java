@@ -1,6 +1,7 @@
 package com.dragonq.dragonq;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
@@ -10,11 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class MainScreen extends Activity {
 
-    String js;
+    ArrayList<Question> list;
     EditText text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +25,14 @@ public class MainScreen extends Activity {
         setContentView(R.layout.activity_main_screen);
         final Button button = (Button) findViewById(R.id.btnGetQuestion);
         text= (EditText) findViewById(R.id.editText4);
-        Thread thread = new Thread(new MyRan());
-        thread.start();
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                //Intent intent = new Intent(MainScreen.this, Questions.class);
-                //startActivity(intent);
+                Thread thread = new Thread(new MyRan());
+                thread.start();
+                Intent intent = new Intent(MainScreen.this, Questions.class);
+                startActivity(intent);
             }
         });
     }
@@ -59,8 +61,7 @@ public class MainScreen extends Activity {
         @Override
         public void run() {
             try {
-                js = new Package().getQuestion().iterator().next().content;
-                text.setText("Wait");
+                list = new Package().getQuestion();
 
             } catch (IOException e) {
                 e.printStackTrace();
