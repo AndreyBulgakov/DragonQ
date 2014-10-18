@@ -18,16 +18,17 @@ public class Package implements Gettarable {
     public List<Question> getQuestion() throws IOException {
         List <Question> list = new ArrayList<Question>();
 
-        String url =  "http://rutracker.org/forum/viewtopic.php";
-        String paramValue = "4052102";
+        String url =  "http://echo.jsontest.com/Id/1/Content/Content/Comment/Comment/Answer/Answer/Tags/Tags";
+        /*String paramValue = "4052102";
         String paramName = "t";
         Connection connection = Jsoup.connect(url);
         Map<String, String> paramsMap = new HashMap<String,String>();
         paramsMap.put(paramName, paramValue);
         Document document = connection.data(paramsMap).get();
-        document.body();
+        document.body();*/
+        String json = Jsoup.connect(url).ignoreContentType(true).execute().body();
+        list.add(new Parser().parse(json));
 
-
-        return null;
+        return list;
     }
 }
