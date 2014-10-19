@@ -8,5 +8,5 @@ import java.util.List;
  */
 
 public interface Gettarable {
-    List<Question> getQuestion() throws IOException;
+    Question[] getQuestion() throws IOException;
 }

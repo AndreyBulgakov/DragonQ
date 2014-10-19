@@ -34,13 +34,14 @@ public class Questions extends Activity {
     JSONArray question = null;
 
     Question[] questionList;
+    ListView list;
+
 
     public class MyRun implements Runnable{
         @Override
         public void run() {
             try {
-                questionList = new Package().getQuestion();
-
+                setList( new Package().getQuestion());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -51,7 +52,7 @@ public class Questions extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
-        final ListView list = (ListView) findViewById(R.id.lstQuestions);
+        list = (ListView) findViewById(R.id.lstQuestions);
         Thread thread = new Thread(new MyRun());
         thread.start();
         try {
@@ -63,15 +64,7 @@ public class Questions extends Activity {
         /*questionList = new Question[2];
         questionList[0]=(new Question(1,"text"));
         questionList[1]=(new Question(2,"text"));*/
-        ArrayAdapterItem adapter = new ArrayAdapterItem(this, R.layout.list_item,  questionList);
 
-
-
-        // create a new ListView, set the adapter and item click listener
-
-
-
-        list.setAdapter(adapter);
 
         list.setClickable(true);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,11 +74,11 @@ public class Questions extends Activity {
 
                 Question question = (Question) list.getItemAtPosition(position);
                 Intent intent = new Intent(Questions.this, QuestionView.class);
-                intent.putExtra("id", question.id);
-                intent.putExtra("content", question.content);
-                intent.putExtra("answer", question.answer);
-                intent.putExtra("tags", question.tags);
-                intent.putExtra("comment", question.comment);
+                intent.putExtra("id", question.Id);
+                intent.putExtra("content", question.Content);
+                intent.putExtra("answer", question.Answer);
+                intent.putExtra("tags", question.Tags);
+                intent.putExtra("comment", question.Comment);
                 startActivity(intent);
     /* write you handling code like...
     String st = "sdcard/";
@@ -97,6 +90,10 @@ public class Questions extends Activity {
 
     }
 
+    void setList( Question[] questions){
+        ArrayAdapterItem adapter = new ArrayAdapterItem(this, R.layout.list_item,  questions);
+        list.setAdapter(adapter);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
