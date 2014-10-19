@@ -3,9 +3,12 @@ package com.dragonq.dragonq;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -48,7 +51,27 @@ public class Questions extends Activity {
 
         list.setAdapter(adapter);
 
+        list.setClickable(true);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+                Question question = (Question) list.getItemAtPosition(position);
+                Intent intent = new Intent(Questions.this, QuestionView.class);
+                intent.putExtra("id", question.id);
+                intent.putExtra("content", question.content);
+                intent.putExtra("answer", question.answer);
+                intent.putExtra("tags", question.tags);
+                intent.putExtra("comment", question.comment);
+                startActivity(intent);
+    /* write you handling code like...
+    String st = "sdcard/";
+    File f = new File(st+o.toString());
+    // do whatever u want to do with 'f' File object
+    */
+            }
+        });
 
     }
 
