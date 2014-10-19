@@ -9,4 +9,12 @@ public class Question {
     String answer;
     String comment;
     String tags;
+
+    public Question() {
+    }
+
+    public Question(int id,String content) {
+        this.id = id;
+        this.content = content;
+    }
 }
