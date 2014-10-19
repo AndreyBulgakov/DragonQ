@@ -23,7 +23,8 @@
         android:layout_centerHorizontal="true"
         android:background="#CC00AD9F"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" />
+        android:layout_marginRight="20dp"
+        style = "@style/ButtonText"/>
 
     <EditText
         android:layout_width="fill_parent"
