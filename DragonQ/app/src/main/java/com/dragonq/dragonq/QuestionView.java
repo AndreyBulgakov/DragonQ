@@ -23,13 +23,13 @@ public class QuestionView extends Activity {
         Intent intent = getIntent();
 
         String id = intent.getStringExtra("id");
-        txtId.setText(id);
+        //txtId.setText(id);
         String content = intent.getStringExtra("content");
         txtContent.setText(content);
         String answer = intent.getStringExtra("answer");
         txtContent.setText(content);
         String tags = intent.getStringExtra("tags");
-        txtContent.setText(content);
+        //txtContent.setText(content);
         String comment = intent.getStringExtra("comment");
         txtContent.setText(content);
 
