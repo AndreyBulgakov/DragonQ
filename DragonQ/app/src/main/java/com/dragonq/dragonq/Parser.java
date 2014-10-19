@@ -1,9 +1,6 @@
 package com.dragonq.dragonq;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.Gson;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,36 +13,10 @@ import java.util.Iterator;
  */
 public class Parser {
 
-    public Question parse(String questionInput) throws FileNotFoundException {
+    public Question[] parse(String questionInput) throws FileNotFoundException {
         
-        Question question = new Question();
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(new StringReader(questionInput));
-        JsonObject jsonQuestion = element.getAsJsonObject();
+        Question[] questions = new Gson().fromJson(questionInput, Question[].class);
 
-        question.id = jsonQuestion.get("Id").getAsInt();
-        question.content = jsonQuestion.get("Content").getAsString();
-        question.answer = jsonQuestion.get("Answer").getAsString();
-        question.comment = jsonQuestion.get("Comment").getAsString();
-        question.tags = jsonQuestion.get("Tags").getAsString();
-
-        return question;
+        return questions;
     }
-    public ArrayList<Question> parseList(String input) throws FileNotFoundException {
-        ArrayList<Question> list = new ArrayList<Question>();
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(new StringReader(input));
-        JsonObject object = element.getAsJsonObject();
-
-        JsonArray array = object.getAsJsonArray("Questions");
-        Iterator<JsonElement> iterator = array.iterator();
-        while (iterator.hasNext()){
-            String jsonQuestion = iterator.next().getAsJsonObject().toString();
-            Question question = parse(jsonQuestion);
-            list.add(question);
-
-        }
-        return list;
-    }
-
 }

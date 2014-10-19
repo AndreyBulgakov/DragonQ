@@ -29,8 +29,6 @@ public class MainScreen extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Thread thread = new Thread(new MyRan());
-                thread.start();
                 Intent intent = new Intent(MainScreen.this, Questions.class);
                 startActivity(intent);
             }
@@ -57,15 +55,5 @@ public class MainScreen extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public class MyRan implements Runnable{
-        @Override
-        public void run() {
-            try {
-                list = new Package().getQuestion();
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

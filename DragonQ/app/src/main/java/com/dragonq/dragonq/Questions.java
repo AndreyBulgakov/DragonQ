@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import org.json.JSONArray;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,14 +31,35 @@ public class Questions extends Activity {
     JSONArray question = null;
 
     Question[] questionList;
+
+    public class MyRun implements Runnable{
+        @Override
+        public void run() {
+            try {
+                questionList = new Package().getQuestion();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
         final ListView list = (ListView) findViewById(R.id.lstQuestions);
-        questionList = new Question[2];
+        Thread thread = new Thread(new MyRun());
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        /*questionList = new Question[2];
         questionList[0]=(new Question(1,"text"));
-        questionList[1]=(new Question(2,"text"));
+        questionList[1]=(new Question(2,"text"));*/
         ArrayAdapterItem adapter = new ArrayAdapterItem(this, R.layout.list_item,  questionList);
 
 

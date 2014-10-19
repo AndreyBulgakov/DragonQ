@@ -15,10 +15,9 @@ import java.util.Map;
  */
 public class Package implements Gettarable {
     @Override
-    public ArrayList<Question> getQuestion() throws IOException {
-        ArrayList<Question> list = new ArrayList<Question>();
-
-        String url =  "http://echo.jsontest.com/Id/1/Content/Content/Comment/Comment/Answer/Answer/Tags/Tags";
+    public Question[] getQuestion() throws IOException {
+        //String url =  "http://echo.jsontest.com/Id/1/Content/Content/Comment/Comment/Answer/Answer/Tags/Tags";
+        String url =  "http://91.225.131.178:60165/api/values?qNum=5&tags=common";
         /*String paramValue = "4052102";
         String paramName = "t";
         Connection connection = Jsoup.connect(url);
@@ -27,8 +26,8 @@ public class Package implements Gettarable {
         Document document = connection.data(paramsMap).get();
         document.body();*/
         String json = Jsoup.connect(url).ignoreContentType(true).execute().body();
-        list.add(new Parser().parse(json));
+        Question[] questions = new Parser().parse(json);
 
-        return list;
+        return questions;
     }
 }

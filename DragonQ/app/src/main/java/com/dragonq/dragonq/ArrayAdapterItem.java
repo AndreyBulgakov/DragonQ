@@ -44,8 +44,8 @@ public class ArrayAdapterItem extends ArrayAdapter<Question> {
 
         // get the TextView and then set the text (item name) and tag (item ID) values
         TextView textViewItem = (TextView) convertView.findViewById(R.id.txtQuestion);
-        textViewItem.setText(question.content);
-        textViewItem.setTag(question.id);
+        textViewItem.setText(question.Content);
+        textViewItem.setTag(question.Id);
 
         return convertView;
 
