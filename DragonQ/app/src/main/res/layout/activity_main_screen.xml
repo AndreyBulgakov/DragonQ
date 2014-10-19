@@ -13,17 +13,19 @@
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Get Questions"
         android:id="@+id/btnGetQuestion"
         android:layout_marginBottom="150dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="#33b5e5" />
+        android:background="#CC00AD9F"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
@@ -31,10 +33,12 @@
         android:layout_marginBottom="175dp"
         android:layout_above="@+id/btnGetQuestion"
         android:layout_centerHorizontal="true"
-        android:hint="amount of questions"/>
+        android:hint="amount of questions"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:ems="10"
@@ -42,7 +46,9 @@
         android:layout_alignTop="@+id/editText4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="83dp"
-        android:hint="hashtag"/>
+        android:hint="hashtag"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
 
 </RelativeLayout>
