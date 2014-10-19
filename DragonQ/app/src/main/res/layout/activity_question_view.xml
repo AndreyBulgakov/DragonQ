@@ -26,6 +26,22 @@
         android:id="@+id/txtContent"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Show answer"
+        android:textColor="@color/grayy"
+        android:id="@+id/btnShowAnswer"
+        android:background="#CC00AD9F"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+    <LinearLayout
+        android:id="@+id/liAnswer"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
     <TextView
         android:text="Answer"
         style="@style/Label"
@@ -54,5 +70,5 @@
         android:id="@+id/txtComment"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
-
+    </LinearLayout>
 </LinearLayout>

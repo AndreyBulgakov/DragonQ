@@ -5,11 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 public class QuestionView extends Activity {
+    Button btnShowAnswer;
+    LinearLayout liAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,16 @@ public class QuestionView extends Activity {
         String comment = intent.getStringExtra("comment");
         txtComment.setText(comment);
 
+
+        liAnswer = (LinearLayout) findViewById(R.id.liAnswer);
+        btnShowAnswer = (Button) findViewById(R.id.btnShowAnswer);
+        btnShowAnswer.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                liAnswer.setVisibility(View.VISIBLE);
+                btnShowAnswer.setVisibility(View.GONE);
+            }
+        });
     }
 
 

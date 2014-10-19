@@ -3,4 +3,5 @@
     <color name="white">#ffffffff</color>
     <color name="darkback">#ff999999</color>
     <color name="grayy">#FFF1F1F1</color>
+    <color name="hint">#FFF1F1F1</color>
 </resources>
