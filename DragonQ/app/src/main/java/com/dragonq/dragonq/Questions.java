@@ -3,6 +3,7 @@ package com.dragonq.dragonq;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 
@@ -104,8 +106,25 @@ public class Questions extends Activity {
     }
 
     void setList( Question[] questions){
-        ArrayAdapterItem adapter = new ArrayAdapterItem(this, R.layout.list_item,  questions);
+        Runnable doUpdateGUI = new Runnable() {
+            public void run() {
+                Context context = getApplicationContext();
+                String msg = "Sorry! There is no such tags in our database or Internet connection failed";
+                int duration = Toast.LENGTH_LONG;
+                Toast.makeText(context, msg, duration).show();
+            }
+        };
+
+        ArrayAdapterItem adapter = new ArrayAdapterItem(this, R.layout.list_item, questions);
         list.setAdapter(adapter);
+        if( adapter.data == null || adapter.data.length <= 0){
+            runOnUiThread(doUpdateGUI);
+            Intent intent = new Intent(Questions.this, MainScreen.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            this.finish();
+            startActivity(intent);
+        }
+
     }
 
     @Override
