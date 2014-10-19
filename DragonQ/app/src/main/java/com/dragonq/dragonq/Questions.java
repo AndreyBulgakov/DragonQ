@@ -3,9 +3,12 @@ package com.dragonq.dragonq;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -31,13 +34,21 @@ public class Questions extends Activity {
     JSONArray question = null;
 
     Question[] questionList;
+    ListView list;
+
 
     public class MyRun implements Runnable{
+        String count;
+        String tags;
+        public MyRun(String count, String tags) {
+            this.count = count.equals("")?"5":count;
+            this.tags = tags.equals("")?"ЧГК":tags;
+        }
+
         @Override
         public void run() {
             try {
-                questionList = new Package().getQuestion();
-
+                setList( new Package().getQuestion(count, tags));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -48,8 +59,14 @@ public class Questions extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
-        final ListView list = (ListView) findViewById(R.id.lstQuestions);
-        Thread thread = new Thread(new MyRun());
+
+        Intent intent = getIntent();
+
+        String count = intent.getStringExtra("count");
+        String tags = intent.getStringExtra("tags");
+
+        list = (ListView) findViewById(R.id.lstQuestions);
+        Thread thread = new Thread(new MyRun(count, tags));
         thread.start();
         try {
             thread.join();
@@ -60,20 +77,36 @@ public class Questions extends Activity {
         /*questionList = new Question[2];
         questionList[0]=(new Question(1,"text"));
         questionList[1]=(new Question(2,"text"));*/
-        ArrayAdapterItem adapter = new ArrayAdapterItem(this, R.layout.list_item,  questionList);
 
 
+        list.setClickable(true);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-        // create a new ListView, set the adapter and item click listener
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 
-
-
-        list.setAdapter(adapter);
-
-
+                Question question = (Question) list.getItemAtPosition(position);
+                Intent intent = new Intent(Questions.this, QuestionView.class);
+                intent.putExtra("id", question.Id);
+                intent.putExtra("content", question.Content);
+                intent.putExtra("answer", question.Answer);
+                intent.putExtra("tags", question.Tags);
+                intent.putExtra("comment", question.Comment);
+                startActivity(intent);
+    /* write you handling code like...
+    String st = "sdcard/";
+    File f = new File(st+o.toString());
+    // do whatever u want to do with 'f' File object
+    */
+            }
+        });
 
     }
 
+    void setList( Question[] questions){
+        ArrayAdapterItem adapter = new ArrayAdapterItem(this, R.layout.list_item,  questions);
+        list.setAdapter(adapter);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

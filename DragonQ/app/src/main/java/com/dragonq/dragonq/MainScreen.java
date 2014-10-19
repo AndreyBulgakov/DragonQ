@@ -24,13 +24,16 @@ public class MainScreen extends Activity {
 
         setContentView(R.layout.activity_main_screen);
         final Button button = (Button) findViewById(R.id.btnGetQuestion);
-        text= (EditText) findViewById(R.id.editText4);
+        text = (EditText) findViewById(R.id.editText4);
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 Intent intent = new Intent(MainScreen.this, Questions.class);
+                intent.putExtra("count", ((EditText) findViewById(R.id.editText4)).getText().toString());
+                intent.putExtra("tags", ((EditText) findViewById(R.id.editText5)).getText().toString());
                 startActivity(intent);
+
             }
         });
     }
