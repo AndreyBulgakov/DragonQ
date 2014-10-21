@@ -1,4 +1,5 @@
 DragonQ
 =======
 
-DragonQuizz
+Application for quiz. Java/Android.
+
